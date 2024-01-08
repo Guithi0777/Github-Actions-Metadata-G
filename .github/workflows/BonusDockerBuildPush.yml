@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  Chouette:
+  DockerBuildtest:
      runs-on: ubuntu-latest
      environment:
       name: Checkout repo

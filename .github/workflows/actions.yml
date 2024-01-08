@@ -22,6 +22,7 @@ jobs:
       - name: Build and Push Docker Image
         run: |
           docker build -t ghcr.io/guithi0777/github-actions-metadata-g/actions/large_alligator:v3 .
-          docker push ghcr.io/guithi0777/github-actions-metadata-g/actions/large_alligator:v3 
+          docker push ghcr.io/guithi0777/github-actions-metadata-g/actions/large_alligator:v3
+           
 
       

@@ -1,5 +1,6 @@
-FROM ubuntu
-RUN chmod -R 755 /home/.
-RUN apt update && apt install -y python3-pip && pip install --upgrade pip && pip freeze > requirements.txt
-ENTRYPOINT ["./"]
-CMD ["python alligator.py"]
+FROM alpine:3.10
+ 
+COPY alligator.py
+ /alligator.py
+ 
+ENTRYPOINT ["/alligator.py"]

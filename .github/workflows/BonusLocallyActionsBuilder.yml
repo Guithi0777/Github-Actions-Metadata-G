@@ -16,7 +16,7 @@ jobs:
 
      - name: Test Local Action
        id: test-action
-       uses: actions/large_alligator@v3
+       uses: ./
        with:
         milliseconds: 3000
        

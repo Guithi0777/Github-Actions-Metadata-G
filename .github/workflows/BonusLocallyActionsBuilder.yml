@@ -17,6 +17,8 @@ jobs:
      - name: Test Local Action
        id: test-action
        uses: actions/large_alligator:v3 .
+       with:
+        milliseconds: 3000
        
      - name: Print Output
        id: output

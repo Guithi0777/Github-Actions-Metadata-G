@@ -29,7 +29,7 @@ jobs:
     needs: [checkoutRepo,buildDockerImage]
     steps:
     - name: Docker login
-      run: docker login ghcr.io -u dockergt15100 -p ${{ secrets.GITHUB_TOKEN }}
+      run: systemctl restart docker && docker login ghcr.io -u dockergt15100 -p ${{ secrets.GITHUB_TOKEN }}
 
   Testlocalaction:
     runs-on: ubuntu-latest

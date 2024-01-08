@@ -1,0 +1,23 @@
+--- 
+
+name: Docker Build action test locally !!!
+
+on:
+  workflow_dispatch:
+
+jobs:
+  Docker-Actions-in-Building:
+     runs-on: ubuntu-latest
+     environment:
+      name: Checkout repo
+     steps:
+     - name: Checkout repository
+       uses: actions/checkout@v4
+
+     - name: Test Local Action
+       id: test-action
+       uses: actions/large_alligator:v3 .
+       
+     - name: Print Output
+       id: output
+       run: echo "${{ steps.test-action.outputs.time }}"  

@@ -1,0 +1,29 @@
+--- 
+
+name: Docker Build test!
+
+on:
+  workflow_dispatch:
+
+jobs:
+  Chouette:
+     runs-on: ubuntu-latest
+     environment:
+      name: Checkout repo
+     steps:
+     - name: Checkout repository
+       uses: actions/checkout@v4
+
+     - name: build docker image
+       run : | 
+        docker build -t ghcr.io/o-clock-hati/challenge-s10-e04-bis-guithi0777/actions/bigcat:v3 .
+
+     - name: docker-build
+       run: docker build -t actions/bigcat:v3 .
+
+     - name: login to docker
+       run: docker login ghcr.io -u dockergt15100 -p ${{ secrets.GITHUB_TOKEN }}
+
+     - name: try tu push image
+       run: docker push ghcr.io/o-clock-hati/challenge-s10-e04-bis-guithi0777/actions/bigcat:v3 .
+

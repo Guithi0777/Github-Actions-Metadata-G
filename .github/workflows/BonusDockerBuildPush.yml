@@ -1,39 +1,52 @@
 --- 
 
-name: Docker Build test!
+name: Docker Build and Test
 
 on:
-  workflow_dispatch:
+  push:
+    branches:
+      - main
 
 jobs:
-  DockerBuildtest:
-     runs-on: ubuntu-latest
-     environment:
-      name: Checkout repo
-     steps:
-     - name: Checkout repository
-       uses: actions/checkout@v4
+  checkoutRepo:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
 
-     - name: build docker image
-       run : | 
-        docker build -t ghcr.io/guithi0777/github-actions-metadata-g/actions/large_alligator:v3 .
+  buildDockerImage:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
 
-     - name: docker-build
-       run: docker build -t actions/large_alligator:v3 .
+    - name: Build Docker image
+      run: docker build -t ghcr.io/guithi0777/github-actions-metadata-g/actions/large_alligator:v3 .
 
-     - name: login to docker
-       run: docker login ghcr.io -u dockergt15100 -p ${{ secrets.GITHUB_TOKEN }}
+  dockerLogin:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Docker login
+      run: docker login ghcr.io -u dockergt15100 -p ${{ secrets.GITHUB_TOKEN }}
 
-     - name: try tu push image
-       run: docker push ghcr.io/guithi0777/github-actions-metadata-g/actions/large_alligator:v3 .
+  pushDockerImage:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Push Docker image
+      run: docker push ghcr.io/guithi0777/github-actions-metadata-g/actions/large_alligator:v3 .
 
-     - name: Test Local Action
-       id: test-action
-       uses: actions/large_alligator@v3 .
-       with:
+  testLocalAction:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Test Local Action
+      id: test-action
+      uses: actions/large_alligator@v3
+      with:
         milliseconds: 3000
-       
-     - name: Print Output
-       id: output
-       run: echo "${{ steps.test-action.outputs.time }}"   
 
+  printOutput:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Print Output
+      id: output
+      run: echo "${{ steps.test-action.outputs.time }}" 
